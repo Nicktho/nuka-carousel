@@ -149,6 +149,10 @@ const Carousel = React.createClass({
   getTouchEvents() {
     var self = this;
 
+    if (this.props.dragging === false) {
+      return null;
+    }
+
     return {
       onTouchStart(e) {
         self.touchObject = {
