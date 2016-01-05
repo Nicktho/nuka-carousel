@@ -47,6 +47,7 @@ const Carousel = React.createClass({
     easing: React.PropTypes.string,
     edgeEasing: React.PropTypes.string,
     framePadding: React.PropTypes.string,
+    onSlideChange: React.PropTypes.func,
     slidesToShow: React.PropTypes.number,
     slidesToScroll: React.PropTypes.number,
     slideWidth: React.PropTypes.oneOfType([
@@ -93,6 +94,12 @@ const Carousel = React.createClass({
 
   componentWillUnmount() {
     this.unbindEvents();
+  },
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.currentSlide !== this.state.currentSlide && this.props.onSlideChange) {
+      this.props.onSlideChange(this.state.currentSlide);
+    }
   },
 
   render() {
